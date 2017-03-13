@@ -28,9 +28,9 @@ html > body{
     display: inline-block;
 }
 
-/*ul {
+ul {
     list-style: none;
-}*/
+}
 
 p {
     font-size: 12px;
@@ -56,8 +56,12 @@ section > div > a > img {
 
 #firstForm {
     display: inline-block;
-    width: 33.33%;
-    padding-left: 50px;
+    width: 37.6%;
+    padding: 0 10px;
+}
+
+main > div {
+    background-color: lightblue;
 }
 
 main #accordion a {
@@ -75,5 +79,19 @@ footer section ul li a {
 }
 
 footer section ul li a:hover {
-    color: lightcoral;
+    color: lightblue;
+}
+
+.fa {
+    color: lightblue;
+    padding: 20px;
+    font-size: 30px;
+    width: 50px;
+    text-align: center;
+    text-decoration: none;
+}
+
+form#firstForm button {
+    width: 35px;
+    height: 35px;
 }
