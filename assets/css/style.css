@@ -28,6 +28,10 @@ html > body{
     display: inline-block;
 }
 
+/*ul {
+    list-style: none;
+}*/
+
 p {
     font-size: 12px;
 }
@@ -54,6 +58,10 @@ section > div > a > img {
     display: inline-block;
     width: 33.33%;
     padding-left: 50px;
+}
+
+main #accordion a {
+    font-size: 12px;
 }
 
 footer {
