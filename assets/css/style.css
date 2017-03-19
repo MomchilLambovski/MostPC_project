@@ -22,15 +22,29 @@ html > body{
 
 #centerNav > ul li {
     float: left;
+    margin-bottom: 0px;
 }
 
 #logo {
     display: inline-block;
 }
 
-ul {
-    list-style: none;
+#acc-login {
+    margin: 10px;
+    height: 350px;
 }
+
+#acc-login div {
+    padding: 10px;
+}
+
+#acc-login div.page-header {
+    margin: 0;
+}
+
+/*ul {
+    list-style: none;
+}*/
 
 p {
     font-size: 12px;
