@@ -6,6 +6,13 @@ html > body{
     display: inline-block;
 }
 
+#main-wrapper1 {
+    display: block;
+}
+
+#main-wrapper2 {
+    display: none;
+}
 #navDiv {
     height: 100px;
 }
@@ -42,9 +49,9 @@ html > body{
     margin: 0;
 }
 
-/*ul {
+ul {
     list-style: none;
-}*/
+}
 
 p {
     font-size: 12px;
@@ -66,12 +73,6 @@ header > div > section {
 
 section > div > a > img {
     padding: 10px;
-}
-
-#firstForm {
-    display: inline-block;
-    width: 37.6%;
-    padding: 0 10px;
 }
 
 main > div {
@@ -108,4 +109,8 @@ footer section ul li a:hover {
 form#firstForm button {
     width: 35px;
     height: 35px;
+}
+
+#registration-form{
+    display: none;
 }
