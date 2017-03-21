@@ -33,17 +33,23 @@ function hideMain1() {
 document.getElementById('profile').addEventListener('click', function (event) {
     event.preventDefault();
     hideMain1();
+    document.getElementById('registration-container').style.display = 'none';
 }, false);
 document.getElementById('signUp').addEventListener('click', function (event) {
     event.preventDefault();
-    hideMain1()
+    hideMain1();
+    document.getElementById('registration-container').style.display = 'none';
 }, false);
 
 document.getElementById('registration').addEventListener('click', function hide(event) {
     event.preventDefault();
     hideMain1();
     var y = document.getElementById('acc-login');
-    var z = document.getElementById('registration-form');
+    var z = document.getElementById('registration-container');
     y.style.display = 'none';
     z.style.display = 'block'
+    document.getElementById('registration-form').style.display = 'block';
 }, false);
+
+
+

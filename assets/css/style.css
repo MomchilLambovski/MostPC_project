@@ -49,6 +49,20 @@ html > body{
     margin: 0;
 }
 
+#registration-form {
+    padding: 10px;
+}
+
+#registration-form div {
+    float: left;
+}
+
+#registration-form div {
+    margin: 20px;
+}
+
+
+
 ul {
     list-style: none;
 }

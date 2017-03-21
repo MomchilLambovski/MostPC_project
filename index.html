@@ -27,7 +27,7 @@
                     <div id="" class="col-md-12" style="height: 40px">
                         <h6 class="col-md-6">Тел.: (02) 91 823 Факс: (02) 873 00 37 Сервиз: 0700 144 11</h6>
                         <div class="container-fluid col-md-6">
-                            <nav id="topRightNav" class="navbar col-md-12">
+                            <nav id="topRightNav" class="navbar col-md-12 col-xs-12">
                                 <ul class="nav navbar-nav">
                                     <li>
                                         <a id="forum" href="">Форум</a>
@@ -360,7 +360,7 @@
             </div>
             <div id="main-wrapper2" class="col-md-12">
                 <div id="acc-login">
-                    <h3 class="page-header" style="margin: 0">Вход или създаване на профил</h3>
+                    <h3 class="page-header">Вход или създаване на профил</h3>
                     <div class="col-md-6 page-header">
                         <h5>Нови клиенти</h5>
                     </div>
@@ -390,11 +390,40 @@
                         </form>
                     </div>
                 </div>
-                <div id="registration-form" class="col-md-12">
-                    <h2 class="page-header">Създай профил</h4>
+                <div id="registration-container" class="col-md-12">
+                    <h2 class="page-header col-md-12" style="margin: 0">Създай профил</h4>
+                        <div class="input-group input-group-large col-md-12">
+                            <form id="registration-form" class="col-md-12">
+                                <div class="col-md-5">
+                                    <label for="">Име</label>
+                                    <input type="text" class="form-control col-md-4" aria-describedby="basic-addon2" placeholder="Мартин">
+                                </div>
+                                <div class="col-md-5">
+                                    <label for="">Фамилия</label>
+                                    <input type="text" class="form-control col-md-4" aria-describedby="basic-addon2" placeholder="Петров">
+                                </div>
+                                <div class="col-md-5">
+                                    <label for="">Email</label>
+                                    <input type="text" class="form-control col-md-4" aria-describedby="basic-addon2" placeholder="martin.petrov@gmail.com">
+                                </div>
+                                <div class="col-md-5">
+                                    <label for="">Парола</label>
+                                    <input type="password" class="form-control col-md-4" aria-describedby="basic-addon2" placeholder="xxxxx">
+                                </div>
+                                <div class="col-md-5">
+                                    <label for="">Повтори парола</label>
+                                    <input type="password" class="form-control col-md-4" aria-describedby="basic-addon2" placeholder="xxxxx">
+                                </div>
+
+                                <div class="btn-group btn-group-large col-md-6">
+                                    <button type="button" class="btn btn-danger btn-large">Завърши профил</button>
+                                </div>
+                            </form>
+                        </div>
                 </div>
             </div>
         </main>
+
 
         <footer>
             <div class="container">
