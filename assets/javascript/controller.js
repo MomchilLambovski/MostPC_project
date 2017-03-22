@@ -24,7 +24,7 @@ function hideMain1() {
     var y = document.getElementById('main-wrapper2');
     var z = document.getElementById('acc-login');
     x.style.display = 'none';
-    if(z.style.display = 'none') z.style.display = 'block';
+    if (z.style.display = 'none') z.style.display = 'block';
     y.style.display = 'block';
 }
 
@@ -51,5 +51,37 @@ document.getElementById('registration').addEventListener('click', function hide(
     document.getElementById('registration-form').style.display = 'block';
 }, false);
 
+function selectedElement(){
+    var curElement = document.activeElement;
+    return  curElement;
+}
 
 
+document.addEventListener('DOMContentLoaded', function formValidation() {
+    document.forms[2].addEventListener('submit', function (event) {
+        for (var index = 0; index < document.forms[2].length - 1; index++) {
+            var element = document.forms[2][index];
+            var parentDiv = element.parentNode;
+            if (element.value.trim().length <= 0) {
+                if(parentDiv.lastChild === document.getElementById('error')){
+                    parentDiv.removeChild(document.getElementById('error'));
+                }
+                var errorMessage = document.createElement("span");
+                errorMessage.id = 'error';
+                errorMessage.style.color = 'red';
+                errorMessage.style.border = '1px solid red';
+                errorMessage.innerHTML = 'Не са въведени коректни данни';
+                event.preventDefault();
+                parentDiv.appendChild(errorMessage);
+                break;
+            } else {
+                if (parentDiv.lastChild === document.getElementById('error')) {
+                    parentDiv.removeChild(document.getElementById('error'));
+                    continue;
+                } else {
+                    continue;
+                }
+            }
+        }
+    }, false);
+});
