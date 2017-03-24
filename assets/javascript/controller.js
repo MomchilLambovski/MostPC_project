@@ -28,7 +28,16 @@ function hideMain1() {
     y.style.display = 'block';
 }
 
+function showRegistration() {
+    hideMain1();
+    var y = document.getElementById('acc-login');
+    var z = document.getElementById('registration-container');
+    y.style.display = 'none';
+    z.style.display = 'block'
+    document.getElementById('registration-form').style.display = 'block';
+}
 
+//Навигация в сайта
 
 document.getElementById('profile').addEventListener('click', function (event) {
     event.preventDefault();
@@ -43,45 +52,65 @@ document.getElementById('signUp').addEventListener('click', function (event) {
 
 document.getElementById('registration').addEventListener('click', function hide(event) {
     event.preventDefault();
-    hideMain1();
-    var y = document.getElementById('acc-login');
-    var z = document.getElementById('registration-container');
-    y.style.display = 'none';
-    z.style.display = 'block'
-    document.getElementById('registration-form').style.display = 'block';
+    showRegistration();
 }, false);
 
-function selectedElement(){
+document.getElementById('goToRegistration').addEventListener('click', function hide(event) {
+    showRegistration();
+    event.preventDefault();
+}, false);
+
+function selectedElement() {
     var curElement = document.activeElement;
-    return  curElement;
-}
+    return curElement;
+};
 
-
-document.addEventListener('DOMContentLoaded', function formValidation() {
-    document.forms[2].addEventListener('submit', function (event) {
-        for (var index = 0; index < document.forms[2].length - 1; index++) {
-            var element = document.forms[2][index];
-            var parentDiv = element.parentNode;
-            if (element.value.trim().length <= 0) {
-                if(parentDiv.lastChild === document.getElementById('error')){
-                    parentDiv.removeChild(document.getElementById('error'));
-                }
-                var errorMessage = document.createElement("span");
-                errorMessage.id = 'error';
-                errorMessage.style.color = 'red';
-                errorMessage.style.border = '1px solid red';
-                errorMessage.innerHTML = 'Не са въведени коректни данни';
-                event.preventDefault();
-                parentDiv.appendChild(errorMessage);
-                break;
+// Проверка дали има вписани данни във форма
+function formValidation(index1) {
+    for (var index = 0; index < document.forms[index1].length - 1; index++) {
+        var element = document.forms[index1][index];
+        var parentDiv = element.parentNode;
+        if (element.value.trim().length <= 0) {
+            if (parentDiv.lastChild === document.getElementById('error')) {
+                parentDiv.removeChild(document.getElementById('error'));
+            }
+            var errorMessage = document.createElement("span");
+            errorMessage.id = 'error';
+            errorMessage.style.color = 'red';
+            errorMessage.innerHTML = 'Не са въведени коректни данни';
+            event.preventDefault();
+            parentDiv.appendChild(errorMessage);
+            return true;
+        } else {
+            if (parentDiv.lastChild === document.getElementById('error')) {
+                parentDiv.removeChild(document.getElementById('error'));
+                continue;
             } else {
-                if (parentDiv.lastChild === document.getElementById('error')) {
-                    parentDiv.removeChild(document.getElementById('error'));
-                    continue;
-                } else {
-                    continue;
-                }
+                continue;
             }
         }
-    }, false);
-});
+    }
+};
+
+
+document.getElementById('createUserWrapper').addEventListener('click', function (event) {
+    if (formValidation(2) == true) {
+        event.stopImmediatePropagation();
+    }
+}, true);
+
+//Създаване на потребител
+document.getElementById('createUser').addEventListener('click', function (event) {
+    var name = document.getElementById('regName').value.toString();
+    var familyName = document.getElementById('regFamily').value.toString();
+    var email = document.getElementById('regEmail').value.toString();
+    var password = document.getElementById('regPassword').value.toString();
+
+    if (!(Store.sameEmail(email))) {
+        Store.addCustomer(name, familyName, email, password);
+        alert('User was successfully registered!');
+    } else {
+        alert('User with this email already exists!');
+    }
+    event.preventDefault();
+}, false);
