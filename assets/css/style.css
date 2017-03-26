@@ -74,6 +74,11 @@ html > body{
     display: inherit;
 }
 
+#shop img {
+    max-width: 100%;
+    height: auto;
+}
+
 #shop div div h4 {
     text-align: center;
 }
@@ -85,6 +90,12 @@ html > body{
 #shop-slide-3 {
     padding-bottom: 20px;
 }
+
+#productList {
+    display: none;
+    background-color: lightblue;
+}
+
 aside {
     display: inline-block;
 }

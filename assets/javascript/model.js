@@ -23,7 +23,7 @@ var Store = (function () {
         return new Admin(firstName, secondName, email, password);
     }
 
-    var shop = [];
+    var shop = JSON.parse(window.localStorage.getItem('shop')) || [];
 
     function Product(name, price, imageURL, type) {
         this.name = name;
@@ -43,8 +43,10 @@ var Store = (function () {
         createProduct: function (name, price, imageURL, type) {
             switch (type) {
                 case "laptop":
-                    shop.push(new Product(name, price, imageURL, type));
-                    window.localStorage.setItem('shop', JSON.stringify(shop));
+                    if (!(Store.getProductByName(name))) {
+                        shop.push(new Product(name, price, imageURL, type));
+                        window.localStorage.setItem('shop', JSON.stringify(shop));
+                    }
                     break;
                 case "tablet":
                     shop.push(new Product(name, price, imageURL, type));
@@ -82,14 +84,18 @@ var Store = (function () {
             }
         },
 
-        getProduct: function (name) {
+        getProductByName: function (name) {
             for (var index = 0; index < shop.length; index++) {
-                if (shop[index].hasOwnProperty("email")) {
+                if (shop[index].hasOwnProperty("name")) {
                     if (shop[index].name === name) {
                         return shop[index];
                     };
                 }
             }
+        },
+
+        getAllProducts: function () {
+            return JSON.parse(window.localStorage.getItem('shop'));
         },
 
 
@@ -106,8 +112,8 @@ var Store = (function () {
             }
         },
 
-        getLoggedUser: function (){
-           return activeUser = JSON.parse(sessionStorage.getItem('activeUser'));
+        getLoggedUser: function () {
+            return activeUser = JSON.parse(sessionStorage.getItem('activeUser'));
         },
 
         sameEmail: function (emailche) {

@@ -1,3 +1,15 @@
+function productListVisibility(show) {
+    if (show) {
+        document.getElementById('productList').style.display = 'block';
+    } else {
+        document.getElementById('productList').style.display = 'none';
+    }
+}
+
+window.addEventListener('load', function () {
+    productListVisibility(false);
+}, false);
+
 function getElement(element) {
     return getElementById(element);
 }
@@ -33,7 +45,6 @@ function showRegistration() {
 }
 
 //Навигация в сайта
-
 document.getElementById('profile').addEventListener('click', function (event) {
     event.preventDefault();
     if (Store.checkLoggedIn()) {
@@ -68,10 +79,13 @@ document.getElementById('goToRegistration').addEventListener('click', function h
     event.preventDefault();
 }, false);
 
-function selectedElement() {
-    var curElement = document.activeElement;
-    return curElement;
-};
+function hideNavbar() {
+    var navbar = document.getElementById('topRightNav');
+    if (window.innerWidth <= 768) {
+        navbar.parentElement.removeChild(navbar);
+
+    }
+}
 
 // Проверка дали има вписани данни във форма
 function formValidation(index1) {
@@ -208,3 +222,74 @@ function profilePage() {
         }));
     }
 })();
+
+(function generateAllProducts() {
+    Store.createProduct("Лаптоп LENOVO 110-14IBR", 439.20, "http://most.bg/media/catalog/product/cache/1/small_image/295x295/9df78eab33525d08d6e5fb8d27136e95/5/6/56701.png", "laptop");
+    Store.createProduct("Лаптоп LENOVO Yoga 3 Pro 13", 2250.00, "http://most.bg/media/catalog/product/cache/1/small_image/196x196/9df78eab33525d08d6e5fb8d27136e95/l/e/lenovo_yoga3_pro_1.png", "laptop");
+    Store.createProduct("Лаптоп Green Very Stylish", 439.20, "http://www.freeiconspng.com/uploads/laptop-png-27.png", "laptop");
+    Store.createProduct("Лаптоп LENOVO 110-14IBR", 439.20, "http://most.bg/media/catalog/product/cache/1/small_image/295x295/9df78eab33525d08d6e5fb8d27136e95/5/6/56701.png", "laptop");
+    Store.createProduct("Лаптоп LENOVO 110-14IBR", 439.20, "http://most.bg/media/catalog/product/cache/1/small_image/295x295/9df78eab33525d08d6e5fb8d27136e95/5/6/56701.png", "laptop");
+
+})();
+
+(function showProducts() {
+    var productList = document.getElementById('productList');
+    productList.style.display = 'block';
+    (function displayProducts() {
+        var shop = Store.getAllProducts();
+        for (var index = 0; index < shop.length; index++) {
+            var x = document.createElement('div');
+            x.className = "col-md-3";
+            for (var key in shop[index]) {
+                if (shop[index].hasOwnProperty(key)) {
+                    var property = shop[index][key];
+                    switch (key) {
+                        case "type":
+                            break;
+                        case "imageURL": {
+                            var image = document.createElement('img');
+                            image.src = property;
+                            image.style.maxWidth = "100%";
+                            image.style.maxHeight = "auto";
+                            image.style.display = "block";
+                            x.appendChild(image);
+                        }
+                            break;
+                        case "name":
+                            var ime = document.createElement('h3');
+                            ime.innerText = property;
+                            ime.className = 'page-header';
+                            ime.style.color = 'white';
+                            x.appendChild(ime);
+                            break;
+                        case "price":
+                            var cena = document.createElement('h5');
+                            cena.innerText = property + " лева с ДДС";
+                            cena.className  = 'page-header';
+                            cena.style.color = 'white';
+                            x.appendChild(cena);
+                            break;
+                    }
+
+                    // var property = shop[index][key];
+                    // if (property !== shop[index].imageURL) {
+                    //     if (property !== shop[index].type) x.innerHTML += property;
+                    // } else {
+                    //     var image = document.createElement('img');
+                    //     image.src = property;
+                    //     image.style.maxWidth = "100%";
+                    //     image.style.maxHeight = "auto;";
+                    //     x.appendChild(image);
+                    // }
+                }
+            }
+            productList.appendChild(x);
+        }
+        return true;
+    })();
+})();
+
+document.getElementById('shop-slide-1').children[1].addEventListener('click', function () {
+    hideMain1And2();
+    productListVisibility(true);
+}, false);
