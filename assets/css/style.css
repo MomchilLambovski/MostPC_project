@@ -8,6 +8,7 @@ html > body{
 
 #main-wrapper1 {
     display: block;
+    margin-bottom: 20px;
 }
 
 #main-wrapper2 {
@@ -81,7 +82,9 @@ html > body{
     width: 200px;
     height: 200px;
 }
-
+#shop-slide-3 {
+    padding-bottom: 20px;
+}
 aside {
     display: inline-block;
 }

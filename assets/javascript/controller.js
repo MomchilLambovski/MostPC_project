@@ -179,12 +179,32 @@ function profilePage() {
         }
     })();
 
-    (function (){
+    (function () {
         var user = Store.getLoggedUser();
         var details = document.getElementById('profile-details');
-        
+
     });
 };
 
 //Основна част на магазина
 
+(function shopControl() {
+    var shop = document.getElementById('shop');
+    for (var index = 0; index < shop.children.length; index++) {
+        var shopChildren = shop.children[index].children;
+        Array.prototype.forEach.call(shopChildren, (function (element) {
+            if (element.nodeName == "DIV") {
+                element.addEventListener('mouseover', function highlight(event) {
+                    element.style.border = '1px solid white';
+                    element.style.boxShadow = '10px 10px';
+                    console.log(element.nodeName);
+                }, false);
+
+                element.addEventListener('mouseout', function exit(event) {
+                    element.style.border = '0px';
+                    element.style.boxShadow = '0px 0px';
+                }, false);
+            }
+        }));
+    }
+})();
