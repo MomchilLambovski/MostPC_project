@@ -40,6 +40,10 @@ var Store = (function () {
 
     return {
 
+        search: function (input) {
+
+        },
+
         createProduct: function (name, price, imageURL, type) {
             switch (type) {
                 case "laptop":
@@ -49,20 +53,28 @@ var Store = (function () {
                     }
                     break;
                 case "tablet":
-                    shop.push(new Product(name, price, imageURL, type));
-                    window.localStorage.setItem('shop', JSON.stringify(shop));
+                    if (!(Store.getProductByName(name))) {
+                        shop.push(new Product(name, price, imageURL, type));
+                        window.localStorage.setItem('shop', JSON.stringify(shop));
+                    }
                     break;
                 case "smartphone":
-                    shop.push(new Product(name, price, imageURL, type));
-                    window.localStorage.setItem('shop', JSON.stringify(shop));
+                    if (!(Store.getProductByName(name))) {
+                        shop.push(new Product(name, price, imageURL, type));
+                        window.localStorage.setItem('shop', JSON.stringify(shop));
+                    }
                     break;
                 case "server":
-                    shop.push(new Product(name, price, imageURL, type));
-                    window.localStorage.setItem('shop', JSON.stringify(shop));
+                    if (!(Store.getProductByName(name))) {
+                        shop.push(new Product(name, price, imageURL, type));
+                        window.localStorage.setItem('shop', JSON.stringify(shop));
+                    }
                     break;
                 case "component":
-                    shop.push(new Product(name, price, imageURL, type));
-                    window.localStorage.setItem('shop', JSON.stringify(shop));
+                    if (!(Store.getProductByName(name))) {
+                        shop.push(new Product(name, price, imageURL, type));
+                        window.localStorage.setItem('shop', JSON.stringify(shop));
+                    }
                     break;
             }
         },
@@ -92,6 +104,20 @@ var Store = (function () {
                     };
                 }
             }
+        },
+
+        getProductsByType: function (type) {
+            var products = Store.getAllProducts();
+            var matchingProducts = [];
+            products.forEach(function (element) {
+                for (var key in element) {
+                    if (element.hasOwnProperty(key)) {
+                        if(key == type)
+                        matchingProducts.push(element);
+                    }
+                }
+            }, this);
+            return matchingProducts;
         },
 
         getAllProducts: function () {
