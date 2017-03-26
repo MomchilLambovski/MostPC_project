@@ -1,23 +1,12 @@
-// document.getElementById("signUp").addEventListener('click', function replaceMain() {
-//     var mainDivContent = document.body.children[0].children[1];
-//     var newDiv = document.createElement('div');
-//     newDiv.style.backgroundColor = "blue";
-//     newDiv.style.width = "1000px";
-//     newDiv.style.height = "100px";
-//     mainDivContent.innerHTML = newDiv;
-//     // return document.body.children[0].children[1].replaceChild(newDiv, mainDiv);
-// }, false);
-
-// document.body.children[0].children[1].children[0].style.display = "none";
-
-// var main = document.getElementById("main-wrapper");
-// document.querySelector("main").removeChild(main);
-// console.log(typeof Array.prototype.findIndex());
-
 function getElement(element) {
     return getElementById(element);
 }
-
+function hideMain1And2() {
+    var main1 = document.getElementById('main-wrapper1');
+    var main2 = document.getElementById('main-wrapper2');
+    main1.style.display = 'none';
+    main2.style.display = 'none';
+}
 
 function hideMain1() {
     var x = document.getElementById('main-wrapper1');
@@ -27,6 +16,12 @@ function hideMain1() {
     if (z.style.display = 'none') z.style.display = 'block';
     y.style.display = 'block';
 }
+
+function displayProfile() {
+    var x = document.getElementById('profile-page');
+    x.style.display = 'block';
+    event.preventDefault();
+};
 
 function showRegistration() {
     hideMain1();
@@ -41,14 +36,27 @@ function showRegistration() {
 
 document.getElementById('profile').addEventListener('click', function (event) {
     event.preventDefault();
-    hideMain1();
-    document.getElementById('registration-container').style.display = 'none';
+    if (Store.checkLoggedIn()) {
+        hideMain1And2();
+        displayProfile();
+        profilePage();
+    } else {
+        hideMain1();
+        document.getElementById('registration-container').style.display = 'none';
+    }
 }, false);
 document.getElementById('signUp').addEventListener('click', function (event) {
     event.preventDefault();
-    hideMain1();
-    document.getElementById('registration-container').style.display = 'none';
+    if (Store.checkLoggedIn()) {
+        hideMain1And2();
+        displayProfile();
+        profilePage();
+    } else {
+        hideMain1();
+        document.getElementById('registration-container').style.display = 'none';
+    }
 }, false);
+
 
 document.getElementById('registration').addEventListener('click', function hide(event) {
     event.preventDefault();
@@ -109,8 +117,74 @@ document.getElementById('createUser').addEventListener('click', function (event)
     if (!(Store.sameEmail(email))) {
         Store.addCustomer(name, familyName, email, password);
         alert('User was successfully registered!');
+        hideMain1And2();
+        displayProfile();
+        profilePage();
     } else {
         alert('User with this email already exists!');
     }
     event.preventDefault();
 }, false);
+
+
+//Логин
+document.getElementById('loginUserWrapper').addEventListener('click', function (event) {
+    if (formValidation(1) == true) {
+        event.stopImmediatePropagation();
+    }
+}, true);
+
+document.getElementById('loginUser').addEventListener('click', function (event) {
+    var email = document.forms[1][0].value.toString();
+    var password = document.forms[1][1].value.toString();
+
+
+    if (Store.sameEmail(email) && Store.samePassword(password)) {
+        if (document.getElementById('login').lastChild === document.getElementById('errorMessage')) {
+            document.getElementById('login').removeChild(document.getElementById('errorMessage'));
+        }
+        window.sessionStorage.setItem('activeUser', JSON.stringify(Store.getCustomer(email)));
+        alert('You have successfully logged in!');
+        hideMain1And2();
+        displayProfile();
+    } else {
+        if (document.getElementById('login').lastChild === document.getElementById('errorMessage')) {
+            document.getElementById('login').removeChild(document.getElementById('errorMessage'));
+        }
+        var errorMessage = document.createElement('span');
+        var parent = document.getElementById('login');
+        errorMessage.innerHTML = "Грешна парола или имейл";
+        errorMessage.style.color = 'red';
+        errorMessage.id = 'errorMessage'
+        parent.appendChild(errorMessage);
+        event.preventDefault();
+    }
+}, false);
+
+//Профилна страница
+function profilePage() {
+    (function () {
+        var profile = document.getElementById('profile-data');
+        var x = document.createElement('h4');
+        var user = Store.getLoggedUser();
+        var firstName = user.firstName;
+        var secondName = user.secondName;
+        x.innerText = "Здравейте, " + firstName + " " + secondName + "!";
+        x.id = 'greeting';
+
+        if (document.getElementById('profile-data').lastElementChild == document.getElementById('greeting')) {
+            return profile.replaceChild(x, x);
+        } else {
+            return profile.appendChild(x);
+        }
+    })();
+
+    (function (){
+        var user = Store.getLoggedUser();
+        var details = document.getElementById('profile-details');
+        
+    });
+};
+
+//Основна част на магазина
+
